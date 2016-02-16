@@ -2,7 +2,6 @@ package computomovil.fmat.lalo.databasestudents;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -19,30 +18,35 @@ public class MainActivity extends ListActivity {
     private StudentService stdService;
     StudentDataSource alumnoDS;
 
+    private void setComponentsForWorking() {
+        try {
+            alumnoDS.open();
+            stdService.setStudents(alumnoDS.getAllAlumnos());
+            alumnoDS.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                stdService.getAllMatricesRegistered()
+        );
+        this.setListAdapter(adapter);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         stdService = new StudentService();
         alumnoDS = new StudentDataSource(getApplicationContext());
-        try {
-            alumnoDS.open();
-            stdService.setStudents(alumnoDS.getAllAlumnos());
-            System.out.println("Students:");
-            System.out.println(alumnoDS.getAllAlumnos());
-            System.out.println(stdService.getStudents());
-            alumnoDS.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        setComponentsForWorking();
+    }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                stdService.getAllMatricesRegistered()
-        );
-
-        this.setListAdapter(adapter);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setComponentsForWorking();
     }
 
     public void addStudent(View v) {

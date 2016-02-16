@@ -71,6 +71,7 @@ public class FormStudent extends AppCompatActivity {
         }
 
         Toast.makeText(this, "Estudiante actualizado", Toast.LENGTH_LONG).show();
+        this.finish();
     }
 
     public void saveStudent(View v) {
@@ -85,6 +86,7 @@ public class FormStudent extends AppCompatActivity {
             e.printStackTrace();
         }
         Toast.makeText(this, "Estudiante guardado", Toast.LENGTH_LONG).show();
+        this.finish();
     }
 
     public void deleteStudent(View v) {
@@ -98,5 +100,6 @@ public class FormStudent extends AppCompatActivity {
             e.printStackTrace();
         }
         Toast.makeText(this, "Estudiante eliminado", Toast.LENGTH_LONG).show();
+        this.finish();
     }
 }
