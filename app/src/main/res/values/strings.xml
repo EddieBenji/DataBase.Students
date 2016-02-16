@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Database sqlite</string>
+    <string name="text_name">Nombre</string>
+    <string name="text_matricula">Matrícula</string>
+    <string name="text_lastName">Apellido</string>
+    <string name="lbl_save">Guardar</string>
+    <string name="lbl_addStudent">Agregar estudiante</string>
+    <string name="lbl_delete">Eliminar</string>
+    <string name="lbl_update">Actualizar</string>
+</resources>
